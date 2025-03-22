@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tharun's Portfolio</title>
+    <meta name="description" content="Tharun's Digital Portfolio" />
+    <meta name="author" content="Tharun" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        overflow-x: hidden;
+        color: #333;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* Navigation styles */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 2rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #333;
+        text-decoration: none;
+        background: linear-gradient(135deg, #0c71c9, #0acfa7);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #555;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #0c71c9;
+      }
+
+      .menu-toggle {
+        display: none;
+        cursor: pointer;
+      }
+
+      /* Hero section styles */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #3d86c5, #34d1b2);
+        padding-top: 80px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .hero-text {
+        width: 50%;
+        color: white;
+        padding-right: 2rem;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .hero-text h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 400;
+      }
+
+      .hero-img {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-img img {
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: black;
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      /* About section styles */
+      .about {
+        padding: 5rem 0;
+        background-color: #f9f9f9;
+      }
+
+      .about-container {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+      }
+
+      .about-img {
+        flex: 1;
+      }
+
+      .about-img img {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-text h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      .about-text p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        color: #555;
+      }
+
+      /* Achievements section styles */
+      .achievements {
+        padding: 5rem 0;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        position: relative;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(135deg, #0c71c9, #0acfa7);
+        border-radius: 5px;
+      }
+
+      .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .achievement-card {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .achievement-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(to bottom, #0c71c9, #0acfa7);
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+      }
+
+      .achievement-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .achievement-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+      }
+
+      .achievement-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 0.75rem;
+      }
+
+      .achievement-card p:last-child {
+        margin-bottom: 0;
+      }
+
+      .achievement-card p strong {
+        color: #0c71c9;
+        font-weight: 600;
+      }
+
+      .achievement-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .achievement-card-header .icon {
+        background: linear-gradient(135deg, #0c71c9, #0acfa7);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        color: white;
+        font-size: 1.2rem;
+        box-shadow: 0 2px 10px rgba(12, 113, 201, 0.2);
+      }
+
+      .show-more-btn {
+        display: block;
+        margin: 0 auto;
+        background: linear-gradient(135deg, #0c71c9, #0acfa7);
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .show-more-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .achievement-detail {
+        position: relative;
+        padding-left: 25px;
+      }
+
+      .achievement-detail::before {
+        content: "=>";
+        position: absolute;
+        left: 0;
+        color: #0c71c9;
+        font-weight: bold;
+      }
+
+      /* Contact section styles */
+      .contact {
+        padding: 5rem 0;
+        background-color: #fff;
+      }
+
+      .contact-container {
+        display: flex;
+        gap: 4rem;
+      }
+
+      .contact-info {
+        flex: 1;
+      }
+
+      .contact-info h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      .contact-info p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        color: #555;
+      }
+
+      .contact-details {
+        list-style: none;
+      }
+
+      .contact-details li {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .contact-details li i {
+        margin-right: 1rem;
+        color: #0c71c9;
+      }
+
+      .contact-form {
+        flex: 1;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #0c71c9;
+      }
+
+      .form-group textarea {
+        height: 150px;
+        resize: vertical;
+      }
+
+      /* Footer styles */
+      footer {
+        background: linear-gradient(135deg, #34d9f2, #6480f9);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+      }
+
+      footer p {
+        font-size: 1rem;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        .menu-toggle.active + .nav-links {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background-color: white;
+          padding: 1rem 0;
+          box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-toggle.active + .nav-links li {
+          margin: 0;
+          text-align: center;
+          padding: 0.8rem 0;
+        }
+
+        .hero-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .hero-text,
+        .hero-img {
+          width: 100%;
+          padding: 0;
+          margin-bottom: 2rem;
+        }
+
+        .hero-img img {
+          width: 250px;
+          height: 250px;
+        }
+
+        .about-container,
+        .contact-container {
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .about-img {
+          text-align: center;
+        }
+
+        .achievement-card {
+          padding: 1.5rem;
+        }
+      }
+
+      /* 3D Contact Form Styles */
+      .contact-3d-container {
+        position: relative;
+        width: 100%;
+        perspective: 1000px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 600px;
+      }
+
+      .form-card {
+        width: 400px;
+        padding: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        transform-style: preserve-3d;
+        transform: rotateY(5deg) rotateX(5deg);
+        transition: transform 0.7s ease;
+        position: relative;
+        z-index: 10;
+      }
+
+      .form-card:hover {
+        transform: rotateY(0deg) rotateX(0deg);
+      }
+
+      .form-content h2 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .form-content p {
+        text-align: center;
+        color: #555;
+        margin-bottom: 30px;
+      }
+
+      .input-group {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .input-group input,
+      .input-group textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid transparent;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        font-size: 1rem;
+        color: #333;
+        outline: none;
+        transition: all 0.5s ease;
+      }
+
+      .input-group input:focus,
+      .input-group textarea:focus {
+        border-color: #0c71c9;
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .input-group label {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        color: #555;
+        pointer-events: none;
+        transition: all 0.4s ease;
+      }
+
+      .input-group textarea ~ label {
+        top: 25px;
+      }
+
+      .input-group input:focus + label,
+      .input-group textarea:focus + label,
+      .input-group input:not(:placeholder-shown) + label,
+      .input-group textarea:not(:placeholder-shown) + label {
+        top: -10px;
+        left: 15px;
+        font-size: 0.8rem;
+        color: #0c71c9;
+        background-color: white;
+        padding: 0 5px;
+      }
+
+      .glow-button {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(90deg, #0c71c9, #0acfa7);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        text-transform: uppercase;
+        transition: background 0.3s ease, transform 0.3s ease;
+        margin-bottom: 15px;
+      }
+
+      .glow-button:hover {
+        background: linear-gradient(90deg, #0acfa7, #0c71c9);
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px rgba(12, 113, 201, 0.6);
+      }
+
+      .animated-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #3d86c5, #34d1b2);
+        opacity: 0.8;
+        z-index: -1;
+        animation: bgAnimation 10s infinite alternate ease-in-out;
+      }
+
+      @keyframes bgAnimation {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-20px) scale(1.05);
+          opacity: 0.9;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .form-card {
+          width: 90%;
+          padding: 30px;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav id="navbar">
+      <div class="container">
+        <a href="#home" class="logo">Tharun's Portfolio</a>
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 id="greeting">Hi there,</h1>
+            <h1>This is <span style="color: black;">Tharun</span></h1>
+            <h2 id="role">A creative Developer</h2>
+            <h2 id="tagline">Making Innovative things</h2>
+            <button class="btn" id="aboutBtn">About Me</button>
+          </div>
+          <div class="hero-img" id="profileImgContainer">
+            <img src="4.jpg" alt="Tharun" id="profileImg">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container about-container">
+        <div class="about-img">
+          <img src="2.jpg" alt="College campus" id="aboutImg">
+        </div>
+        <div class="about-text">
+          <h2>About Me</h2>
+          <p>I am an 18-year-old student currently studying in SSC, in my first year. I'm passionate about technology and development, constantly exploring new ideas and creating innovative solutions.</p>
+          <p>With a creative mindset and problem-solving abilities, I strive to make a positive impact through my work. I'm always eager to learn and grow, taking on new challenges to expand my knowledge and skills.</p>
+          <p>When I'm not coding or studying, I enjoy exploring new technologies, collaborating on interesting projects, and expanding my professional network.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="achievements">
+      <div class="container">
+        <h2 class="section-title">My Achievements</h2>
+        <div class="achievements-grid">
+          <div class="achievement-card">
+            <div class="achievement-card-header">
+              <div class="icon">🏆</div>
+              <h3>Sports</h3>
+            </div>
+            <div class="achievement-detail">
+              <p><strong>CARROM:</strong> I have got 1st prize in inter school <strong>STATE LEVEL</strong> competition and I went to many district tournament won certificates.</p>
+            </div>
+            <div class="achievement-detail">
+              <p><strong>CRICKET:</strong> From my childhood I love cricket. I am a good <strong>Allrounder</strong>, I have played many district and state matches. I have won man of the match in district level for getting <strong>5 Wickets</strong> in single match.</p>
+            </div>
+            <div class="achievement-detail">
+              <p><strong>VOLLEYBALL:</strong> This is my favourite game. I am a good <strong>Attacker and Defender</strong>, I went to CBSE[U19]cluster Two times. Two times our team went to <strong>Quater finals</strong> out of more than <strong>200</strong> schools.</p>
+            </div>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-card-header">
+              <div class="icon">🎻</div>
+              <h3>Fine Arts</h3>
+            </div>
+            <p><strong>VIOLIN:</strong> I have learned violin for 5 years and completed <strong>2 Grades in bridge academy</strong> and I have participated in <strong>National Level</strong> bridge academy workshops.</p>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-card-header">
+              <div class="icon">🌟</div>
+              <h3>Others</h3>
+            </div>
+            <div class="achievement-detail">
+              <p><strong>BALVIKAS:</strong> In my school I have learned many slokas and bhajans by this I could complete <strong>9 Years</strong> of Diploma course in Balvikas. Now I am a Balvikas Teacher.</p>
+            </div>
+            <div class="achievement-detail">
+              <p><strong>NEWSPAPER:</strong> When I was studying in 8th class, I have written essay on <strong>IMPORTANCE OF EXTRACURRICULAR ACTIVITIES</strong>. My essay was selected by <strong>Hindu newspaper</strong>. My name and essay came in Hindu newspaper.</p>
+            </div>
+            <div class="achievement-detail">
+              <p><strong>ABACUS:</strong> I have completed <strong>3 Levels</strong> in abacus and went to district level abacus competition won certificates.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section - Updated with 3D Form -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title">Contact Me</h2>
+        
+        <div class="contact-3d-container">
+          <div class="form-card">
+            <div class="form-content">
+              <h2>Get In Touch</h2>
+              <p>I'd love to hear from you!</p>
+              <form id="contactForm">
+                <div class="input-group">
+                  <input type="text" name="name" id="name" placeholder=" " required>
+                  <label for="name">Your Name</label>
+                </div>
+                <div class="input-group">
+                  <input type="email" name="email" id="email" placeholder=" " required>
+                  <label for="email">Your Email</label>
+                </div>
+                <div class="input-group">
+                  <textarea name="message" id="message" rows="4" placeholder=" " required></textarea>
+                  <label for="message">Your Message</label>
+                </div>
+                <button type="submit" class="glow-button">Send Message</button>
+              </form>
+            </div>
+          </div>
+          <div class="animated-bg"></div>
+        </div>
+
+        <div class="contact-info" style="margin-top: 40px; text-align: center;">
+          <p>You can also reach me at:</p>
+          <ul class="contact-details" style="list-style: none; padding: 0; margin: 20px 0;">
+            <li><strong>Email:</strong> tharun@example.com</li>
+            <li><strong>Phone:</strong> +91 123-456-7890</li>
+            <li><strong>Location:</strong> Chennai, India</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 Tharun's Portfolio. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Toggle menu for mobile
+      const menuToggle = document.querySelector('.menu-toggle');
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // About button functionality
+      const aboutBtn = document.getElementById('aboutBtn');
+      const greeting = document.getElementById('greeting');
+      const role = document.getElementById('role');
+      const tagline = document.getElementById('tagline');
+      const profileImg = document.getElementById('profileImg');
+      const aboutImg = document.getElementById('aboutImg');
+
+      // Original states
+      const originalGreeting = greeting.textContent;
+      const originalRole = role.textContent;
+      const originalTagline = tagline.textContent;
+      const originalImage = profileImg.src;
+      
+      let isAboutView = false;
+
+      aboutBtn.addEventListener('click', () => {
+        if (!isAboutView) {
+          // Change to about info
+          greeting.textContent = "I am 18 years old";
+          role.textContent = "Studying in SSC";
+          tagline.textContent = "1st year";
+          profileImg.src = aboutImg.src;
+          aboutBtn.textContent = "Back to Home";
+          isAboutView = true;
+        } else {
+          // Restore original info
+          greeting.textContent = originalGreeting;
+          role.textContent = originalRole;
+          tagline.textContent = originalTagline;
+          profileImg.src = originalImage;
+          aboutBtn.textContent = "About Me";
+          isAboutView = false;
+        }
+      });
+
+      // Form submission handling with animation
+      const contactForm = document.getElementById('contactForm');
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Create and display a notification
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = 'Thank you for your message! I will get back to you soon.';
+        notification.style.position = 'fixed';
+        notification.style.bottom = '20px';
+        notification.style.right = '20px';
+        notification.style.backgroundColor = 'rgba(10, 207, 167, 0.9)';
+        notification.style.color = 'white';
+        notification.style.padding = '15px 25px';
+        notification.style.borderRadius = '10px';
+        notification.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
+        notification.style.zIndex = '9999';
+        notification.style.transform = 'translateY(100px)';
+        notification.style.opacity = '0';
+        notification.style.transition = 'all 0.5s ease';
+        
+        document.body.appendChild(notification);
+        
+        // Animate notification
+        setTimeout(() => {
+          notification.style.transform = 'translateY(0)';
+          notification.style.opacity = '1';
+        }, 100);
+        
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+          notification.style.transform = 'translateY(100px)';
+          notification.style.opacity = '0';
+          
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 500);
+        }, 5000);
+        
+        contactForm.reset();
+      });
+
+      // 3D effect for contact form
+      const formCard = document.querySelector('.form-card');
+      if (formCard) {
+        document.addEventListener('mousemove', function(e) {
+          if (window.innerWidth > 768) { // Only apply effect on larger screens
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            formCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+          }
+        });
+
+        // Reset transform when mouse leaves viewport
+        document.addEventListener('mouseleave', function() {
+          formCard.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+      }
+    </script>
+  </body>
+</html>
